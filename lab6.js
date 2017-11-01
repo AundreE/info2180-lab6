@@ -1,8 +1,8 @@
 window.onload = function() {
-var mybutton = document.getElementById("search");
-mybutton.addEventListener("click", myFunction);
+var mybutton = document.getElementById("mySearch");
+mybutton.addEventListener("click", display);
 }
-
+//function sends an alert to user that tells the definition of the word definition
 function myFunction(){
 	var url="request.php?q=definition";
 	var xhttp = new XMLHttpRequest();
@@ -13,4 +13,16 @@ function myFunction(){
     };
 	xhttp.open("GET",url, true);
 	xhttp.send();
+}
+
+//function below allows searching for a word and the definition of the word is printed rather than an alert       
+function display(key){
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function(){
+if (xhttp.readyState== 4 && xhttp.status == 200){
+document.getElementById("result").innerHTML = xhttp.responseText;
+}
+};
+xhttp.open("GET", "request.php?q=" + key, true);
+xhttp.send();
 }
